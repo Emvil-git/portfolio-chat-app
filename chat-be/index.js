@@ -7,9 +7,17 @@ const cors = require("cors");
 
 // const MongoStore = require("connect-mongo")(session);
 
+const userRouters = require("./routes/userRoutes.js");
+
 const app = express();
 
 app.use(cors());
+
+app.use(express.json());
+
+app.use(express.urlencoded({extended:true}));
+
+app.use("/users", userRouters);
 
 mongoose.connect("mongodb+srv://admin:admin@batch230.cqzdm3c.mongodb.net/port-chat?retryWrites=true&w=majority", {
 	useNewUrlParser: true,
