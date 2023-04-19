@@ -3,8 +3,9 @@ const express = require("express");
 const session = require("express-session");
 const socket = require("socket.io");
 const mongoose = require("mongoose");
+const cors = require("cors");
 
-const MongoStore = require("connect-mongo")(session);
+// const MongoStore = require("connect-mongo")(session);
 
 const app = express();
 

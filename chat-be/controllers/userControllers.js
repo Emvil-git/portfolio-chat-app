@@ -32,3 +32,30 @@ module.exports.checkUsernameAvailability = (request, response) =>{
 	})
 	.catch(error => response.send(error));
 }
+
+module.exports.logIn = (request, response) => {
+    return User.findOne({username: request.body.username}).then(
+        result => {
+            if (result == null) {response.send(false)}
+            else {
+                const isPasswordCorrect = bcrypt.compareSync(request.body.password, result.password);
+                if(isPasswordCorrect) {
+                    response.send({access: auth.createAccessToken(result)});
+                } else {
+                    response.send(false);
+                }
+            }
+        }
+    )
+} 
+
+module.exports.getAllUsers = (request, response) => {
+
+    return User.find({}).then((result, error) => {
+        if (error) {
+            response.send(500);
+        } else {
+            response.send(result);
+        }
+    });
+}
