@@ -59,3 +59,4 @@ module.exports.getAllUsers = (request, response) => {
         }
     });
 }
+
